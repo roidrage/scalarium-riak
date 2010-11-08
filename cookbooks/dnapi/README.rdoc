@@ -1,0 +1,9 @@
+= DESCRIPTION: 
+
+DNapi.  This cookbook is used to provide basic dnapi services for ey-cloud-recipes. 
+
+It is required for some recipes in this Github Repository.
+
+= WARRANTY:
+
+No Warranty is offered or implied, as this Cookbook provides functionality that has not been properly exposed/documented for public consumption at this time.
