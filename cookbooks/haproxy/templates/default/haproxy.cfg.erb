@@ -86,4 +86,10 @@ defaults
   listen riak :8098
   <% @backends.each_with_index do |b,i| %>
   server app-<%= i %> <%= b %>:8098 check inter 5000 fastinter 1000 fall 1 weight <%= (@node[:master_app_server][:private_dns_name] == b) ? (50 - (@backends.size - 1)) : 50 %>
-  <% end %>
+<% end %>
+
+  listen riak_pbc :8087
+  mode tcp
+ <% @backends.each_with_index do |b,i| %>
+  server app-<%= i %> <%= b %>:8087 check inter 5000 fastinter 1000 fall 1 weight <%= (@node[:master_app_server][:private_dns_name] == b) ? (50 - (@backends.size - 1)) : 50 %>
+<% end %>
