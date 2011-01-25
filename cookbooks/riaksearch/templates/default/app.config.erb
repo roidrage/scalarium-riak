@@ -4,7 +4,7 @@
  %% Riak Core config
  {riak_core, [
               %% Default location of ringstate
-              {ring_state_dir, "/data/riak/data/ring"},
+              {ring_state_dir, "data/ring" },
 
               %% riak_web_ip is the IP address that the Riak HTTP interface will
               %%  bind to.  If this is undefined, the HTTP interface will not run.
@@ -52,11 +52,6 @@
             %% 8MB.
             {js_max_vm_mem, 8},
 
-            %% js_thread_stack is the maximum amount of thread stack, in megabyes,
-            %% allocate to the Javascript VMs. If unset, the default is 16MB.
-            %% NOTE: This is not the same as the C thread stack.
-            {js_thread_stack, 16},
-
             %% js_source_dir should point to a directory containing Javascript
             %% source files which will be loaded by Riak when it initializes
             %% Javascript VMs.
@@ -72,9 +67,42 @@
             {riak_kv_stat, true}
            ]},
 
+ {riak_search, [
+                {search_backend, merge_index_backend},
+                {java_home, "/usr"}
+               ]},
+ {qilr, [
+         {analysis_port, 6095 },
+         {backend_conn_count, 50 }
+        ]},
+
+ {riak_solr, [
+              {solr_name, "solr"},
+              {default_schema, "search"}
+             ]},
+
+ %% Merge Index Config
+ {merge_index, [
+                {data_root, "data/merge_index"},
+                {buffer_rollover_size, 1048576},
+                {buffer_delayed_write_size, 524288},
+                {buffer_delayed_write_ms, 2000},
+                {max_compact_segments, 20},
+                {segment_query_read_ahead_size, 65536},
+                {segment_compaction_read_ahead_size, 5242880},
+                {segment_file_buffer_size, 20971520},
+                {segment_delayed_write_size, 20971520},
+                {segment_delayed_write_ms, 10000},
+                {segment_full_read_size, 5242880},
+                {segment_block_size, 32767},
+                {segment_values_staging_size, 1000},
+                {segment_values_compression_threshold, 0},
+                {segment_values_compression_level, 1}
+               ]},
+
  %% Bitcask Config
  {bitcask, [
-             {data_root, "/data/riak/data/bitcask"}
+             {data_root, "data/bitcask" }
            ]},
 
  %% Luwak Config
