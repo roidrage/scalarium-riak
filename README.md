@@ -15,7 +15,7 @@ Design
 
 * 2-3+ utility instances (m1.large or larger)
 
-* Riak 0.13 with Bitcask
+* Riak 0.14 with Bitcask
 * Erlang R13B04
 * haproxy on each app instance listening on port 8098 directing to the utility instances.
 
@@ -37,7 +37,7 @@ Currently this Cookbook provides you two ways to boot Riak
 * riak_0 if you wish to start a Riak K/V only Cluster
 * riaksearch_0 if you with to start a Riak Search Enabled K/V Cluster
 
-* Note: _0 nodes are required as that is the 'ring master' if there is such a thing.  Also there is no ending number, so you could theoretically add 255 nodes.
+* Note: _0 nodes are required as that is the 'ring master'.  There is no ending number defined.
 
 * Lastly, Words of Wisdom from Basho themselves.
 
