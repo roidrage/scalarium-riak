@@ -1,5 +1,14 @@
-if ['app_master', 'app'].include?(node[:instance_role])
-  include_recipe "haproxy::configure"
+if ['solo','app_master', 'app'].include?(node[:instance_role])
+  include_recipe "haproxy_riak::configure"
+
+  enable_package 'net-proxy/haproxy' do
+    version '1.4.8'
+  end
+
+  package "net-proxy/haproxy" do
+    version '1.4.8'
+    action :install
+  end
 
 template "/etc/monit.d/haproxy_riak.monitrc" do
   source "haproxy_monitrc.erb"

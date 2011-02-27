@@ -24,7 +24,7 @@ Notes
 
 This Cookbook automates the creation (join) action of a Riak 'Ring' on AppCloud.  As your needs may vary it is suggested to fork this recipe and make any customization you do on the fork.  You can omit the main cookbook it is only there for my testing purposes.
 
-How to Use
+Specifics of Usage
 --------
 
 Currently this Cookbook provides you two ways to boot Riak
@@ -46,6 +46,27 @@ Currently this Cookbook provides you two ways to boot Riak
 > and sometimes it takes a minute or two to converge the ring
 > changing the gossip interval in the conf alleviates this somewhat
 
+Depdencies
+--------
+
+This cookbook depends on the dnapi|emerge cookbook, you can add it as a
+submodule as follows,
+
+``git submodule update --init``  
+``git submodule add git://github.com/damm/ey-dnapi.git cookbooks/dnapi`` 
+``git submodule add git://github.com/damm/ey-emerge.git cookbooks/emerge``  
+
+Installation
+--------
+
+This cookbook can be added as a submodule, provided you have the proper
+dependencies you can add it as such,
+
+``git submodule add git://github.com/damm/ey-riak.git cookbooks/``  
+
+Add the following to your main/recipes/default.rb
+
+``require_recipe "riak"``  
 
 Progress
 --------
