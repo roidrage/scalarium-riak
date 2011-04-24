@@ -1,6 +1,8 @@
 global
-  # maximum number of simultaneous active connections from an upstream web server
-  maxconn 15000 
+# maximum number of simultaneous active connections from an upstream web server
+  nbproc <%= @node[:cpu][:total] %>
+  ulimit-n 160000
+  maxconn 65535
 
   # Logging to syslog facility local0
   # log   127.0.0.1       local0
@@ -29,7 +31,7 @@ defaults
 
   # Maximum number of simultaneous active connections from an upstream web server 
   # per service
-  maxconn 15000
+  maxconn 65535
 
   # Log details about HTTP requests
   option httplog
@@ -78,18 +80,18 @@ defaults
 
   # Specify the HTTP method and URI to check to ensure the server is alive.
   # see http://github.com/jnewland/pulse
-  #option httpchk GET /pulse
+  option httpchk GET /ping
 
   # Amount of time after which a health check is considered to have timed out
   timeout check 2000
 
   listen riak :8098
   <% @backends.each_with_index do |b,i| %>
-    server riaksearch-<%= i %> <%= b %>:8098 check inter 5000 fastinter 1000 fall 1 weight 50
+    server app-<%= i %> <%= b %>:8098 check inter 5000 fastinter 1000 fall 1 weight 50
 <% end %>
 
   listen riak_pbc :8087
   mode tcp
  <% @backends.each_with_index do |b,i| %>
-   server riaksearch-<%= i %> <%= b %>:8087 check inter 5000 fastinter 1000 fall 1 weight 50
+   server app-<%= i %> <%= b %>:8087 check inter 5000 fastinter 1000 fall 1 weight 50
 <% end %>
