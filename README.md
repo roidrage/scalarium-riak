@@ -27,17 +27,17 @@ This Cookbook automates the creation (join) action of a Riak 'Ring' on AppCloud.
 Specifics of Usage
 --------
 
-Currently this Cookbook provides you two ways to boot Riak
+Currently this Cookbook provides the following methods of using Riak:
 
 1. Riak K/V only
-2. Riaksearch with K/V
 
-* As you will not want to mix your clusters likely, this recipe assumes this behavior.  Add a utility instance to your environment with the following naming scheme to use,
+  * Add an utility instance with the following naming scheme,
 
-* riak_0 if you wish to start a Riak K/V only Cluster
-* riaksearch_0 if you with to start a Riak Search Enabled K/V Cluster
+  * riak_0
+  * riak_1
+  ...
 
-* Note: _0 nodes are required as that is the 'ring master'.  There is no ending number defined.
+  * Note you must always start with _0 as that is the 'ring master'.  
 
 * Lastly, Words of Wisdom from Basho themselves.
 
@@ -67,11 +67,6 @@ dependencies you can add it as such,
 Add the following to your main/recipes/default.rb
 
 ``require_recipe "riak"``  
-
-Progress
---------
-
-* Riak and Riaksearch should work just fine.  Currently they always try to join _0 node, I will address this later on properly.
 
 How to get Support
 --------
