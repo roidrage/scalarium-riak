@@ -45,12 +45,12 @@
             %% node.  8 is a good default for smaller installations. A larger
             %% number like 12 or 16 is appropriate for installations handling
             %% lots of map/reduce processing.
-            {js_vm_count, 8},
+            {js_vm_count, <%= @js_vm_count %>},
 
             %% js_max_vm_mem is the maximum amount of memory, in megabytes,
             %% allocated to the Javascript VMs. If unset, the default is
             %% 8MB.
-            {js_max_vm_mem, 8},
+            {js_max_vm_mem, <%= @js_max_vm_mem %>},
 
             %% js_thread_stack is the maximum amount of thread stack, in megabyes,
             %% allocate to the Javascript VMs. If unset, the default is 16MB.
@@ -74,7 +74,16 @@
 
  %% Bitcask Config
  {bitcask, [
-             {data_root, "/data/riak/data/bitcask"}
+            {data_root, "<%= @data_root %>"},
+            {max_file_size, <%= @max_file_size %>},
+            {sync_strategy, <%= @sync_strategy %>},
+            {merge_window, <%= @merge_window %>},
+            {frag_merge_trigger, <%= @frag_merge_trigger %>},
+            {dead_bytes_merge_trigger, <%= @dead_bytes_merge_trigger %>},
+            {frag_threshold, <%= @frag_threshold %>},
+            {dead_bytes_threshold, <%= @dead_bytes_threshold %>},
+            {small_file_threshold, <%= @small_file_threshold %>},
+            {expiry_secs, <%= @expiry_secs %>}
            ]},
 
  %% Luwak Config
