@@ -3,7 +3,7 @@
 # This portion of the recipe runs on all instances, except the utility instances.  You don't want haproxy on the utility instances but you do on solo|app|app_master
 if ['solo','app','app_master'].include?(node[:instance_role])
   require_recipe "riak::haproxy"
-  require_recipe "riak::basho_bench"
+#  require_recipe "riak::basho_bench"
 end
 
 # This portion of the recipe runs on only utility instances
@@ -36,6 +36,7 @@ if ['util'].include?(node[:instance_role])
     include_recipe "riak::configure_riak"
     include_recipe "riak::start_riak"
     include_recipe "riak::join_ring"
+    #include_recipe "riak::basho_bench"
   end
 end
 
