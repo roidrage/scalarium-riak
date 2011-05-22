@@ -16,8 +16,8 @@ template "/data/riak/etc/app.config" do
   owner node[:owner_name]
   group node[:owner_name]
   variables(
-    :js_vm_count => node[:riaksearch][:js_vm_count],
-    :js_max_vm_mem => node[:riaksearch][:js_max_vm_mem],
+    :js_vm_count => node[:riak][:js_vm_count],
+    :js_max_vm_mem => node[:riak][:js_max_vm_mem],
     :max_file_size => node[:bitcask][:max_file_size],
     :open_timeout => node[:bitcask][:open_timeout],
     :sync_strategy => node[:bitcask][:sync_strategy],
