@@ -28,6 +28,7 @@ template "/data/riak/etc/app.config" do
     :dead_bytes_threshold => node[:bitcask][:dead_bytes_threshold],
     :small_file_threshold => node[:bitcask][:small_file_threshold],
     :expiry_secs => node[:bitcask][:expiry_secs],
-    :data_root => node[:bitcask][:data_root]
+    :data_root => node[:bitcask][:data_root],
+    :luwak => node[:luwak][:enabled]
   )
 end
