@@ -20,6 +20,7 @@ define :s3_forceinstall, :atom => nil do
 
   execute "remove old package file" do
     command "rm /engineyard/portage/packages/#{full_name}.tbz2"
+    only_if { File.exists?("/engineyard/portage/packages/#{full_name}.tbz2") }
   end
 
   remote_file "/engineyard/portage/packages/#{full_name}.tbz2" do
