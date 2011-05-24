@@ -29,7 +29,7 @@ define :s3_forceinstall, :atom => nil do
     backup false
   end
 
-  execute "emerge /engineyard/portage/packages/#{full_name}.tbz2" do
+  execute "emerge --ignore-default-opts /engineyard/portage/packages/#{full_name}.tbz2" do
     action :run
   end
   
