@@ -1,4 +1,4 @@
-Riak Cookbook for EngineYard AppCloud
+Riak Cookbook for Scalarium
 =========
 
 [Riak][1] is a Dynamo-inspired key/value store that scales predictably and easily. Riak also simplifies development by giving developers the ability to quickly prototype, test, and deploy their applications.
@@ -13,31 +13,21 @@ This cookbook once complete will attempt to provide one method of "Hosting" a Ri
 Design
 --------
 
-* 2-3+ utility instances (m1.large or larger)
-
+* 2-3+ instances (m1.large or larger)
 * Riak 0.14 with Bitcask
-* Erlang R13B04
-* haproxy on each app instance listening on port 8098 directing to the utility instances.
+* haproxy on each app instance listening on port 8098 directing to the Riak instances.
 
 Notes
 --------
 
-This Cookbook automates the creation (join) action of a Riak 'Ring' on AppCloud.  As your needs may vary it is suggested to fork this recipe and make any customization you do on the fork.  You can omit the main cookbook it is only there for my testing purposes.
+This Cookbook automates the creation (join) action of a Riak 'Ring' on Scalarium.  As your needs may vary it is suggested to fork this recipe and make any customization you do on the fork.  You can omit the main cookbook it is only there for my testing purposes.
 
 Specifics of Usage
 --------
 
-Currently this Cookbook provides the following methods of using Riak:
+Create a custom role in Scalarium, its short name is expected to be "riak" (without the quotes).
 
-1. Riak K/V only
-
-  * Add an utility instance with the following naming scheme,
-
-  * riak_0
-  * riak_1
-  ...
-
-  * Note you must always start with _0 as that is the 'ring master'.  
+Add "riak" as a custom recipe to the role. Add instances, start them, boom!
 
 * Lastly, Words of Wisdom from Basho themselves.
 
@@ -46,37 +36,14 @@ Currently this Cookbook provides the following methods of using Riak:
 > and sometimes it takes a minute or two to converge the ring
 > changing the gossip interval in the conf alleviates this somewhat
 
-Depdencies
---------
-
-This cookbook depends on the dnapi|emerge cookbook, you can add it as a
-submodule as follows,
-
-``git submodule update --init``  
-``git submodule add git://github.com/damm/ey-dnapi.git cookbooks/dnapi`` 
-``git submodule add git://github.com/damm/ey-emerge.git cookbooks/emerge``  
-
-Installation
---------
-
-This cookbook can be added as a submodule, provided you have the proper
-dependencies you can add it as such,
-
-``git submodule add git://github.com/damm/ey-riak.git cookbooks/``  
-
-Add the following to your main/recipes/default.rb
-
-``require_recipe "riak"``  
-
 How to get Support
 --------
 
 * irc://irc.freenode.net/#riak
 * This Github repository.
-* This Cookbook provides a technology that is not listed in the Engine Yard [Technology Stack][2]
+* [Twitter me](http://twitter.com/roidrage)
 
-* Additionally because of that there is *NO SUPPORT* for this recipe by EngineYard at this time.  If you have any problems with this reciple please open an issue, add a comment.  If you open a ticket regarding this cookbook you will be directed to this Github repository to open an issue.
+* Additionally because of that there is *NO SUPPORT* for this recipe by Scalarium at this time.  If you have any problems with this reciple please open an issue, add a comment.  If you open a ticket regarding this cookbook you will be directed to this Github repository to open an issue.
 
 
-[1]: http://wiki.basho.com/display/RIAK/Riak
-[2]: http://www.engineyard.com/products/technology/stack
+[1]: http://wiki.basho.com
