@@ -1,13 +1,17 @@
 # Ring Related code here.
 #
-case node['name']
-when "riak_0"
-#I shouldn't do squat here, i'm on the master node.
-Chef::Log.info "I am riak_0 at #{node[:ec2][:public_hostname]}"
-else
-  riak_utility_instance = node['utility_instances'].find {|riak| riak["name"] =~ /riak_0/ }
-  riak_hostname = riak_utility_instance['private_hostname'] || riak_utility_instance['hostname']
+riak_instances = []
 
+node[:scalarium][:roles][:riak][:instances].each do |name, instance|
+  riak_instances << instance[:public_dns_name]
+end
+
+if riak_instances.size == 1 and riak_instances.include?(node[:instance][:public_dns_name])
+  Chef::Log.info "I'm the only instance in this cluster. No need to join. Forever alone."
+else
+  srand
+  riak_instances.delete(node[:instance][:hostname])
+  riak_hostname = riak_instances[rand(riak_instances.size)]
   execute "riak-admin join riak@#{riak_hostname}" do
     action :run
   end
