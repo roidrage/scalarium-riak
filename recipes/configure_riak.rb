@@ -29,6 +29,7 @@ template "/etc/riak/app.config" do
     :small_file_threshold => node[:bitcask][:small_file_threshold],
     :expiry_secs => node[:bitcask][:expiry_secs],
     :data_root => node[:bitcask][:data_root],
-    :luwak => node[:luwak][:enabled]
+    :luwak => node[:luwak][:enabled],
+    :data_dir => node[:riak][:data_dir]
   )
 end

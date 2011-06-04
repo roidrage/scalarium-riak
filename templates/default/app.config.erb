@@ -4,7 +4,7 @@
  %% Riak Core config
  {riak_core, [
               %% Default location of ringstate
-              {ring_state_dir, "/vol/riak/data/ring"},
+              {ring_state_dir, "<%= @data_dir %>/ring"},
 
               %% riak_web_ip is the IP address that the Riak HTTP interface will
               %%  bind to.  If this is undefined, the HTTP interface will not run.
