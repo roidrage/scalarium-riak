@@ -1,8 +1,9 @@
 Riak Cookbook for Scalarium
 =========
 
-Based on the excellent work of [Scott Likens](http://github.com/damm). He wrote this cookbook to automate Riak on the EY
-AppCloud, and I blatantly copied his work an adapted it to work on [Scalarium](http://scalarium.com). Thanks, Scott!
+Based on the excellent work of [Scott Likens](http://github.com/damm). He wrote [this
+cookbook](http://github.com/damm/ey-riak) to automate Riak on the EY AppCloud, and I blatantly copied his work an
+adapted it to work on [Scalarium](http://scalarium.com). Thanks, Scott!
 
 [Riak][1] is a Dynamo-inspired key/value store that scales predictably and easily. Riak also simplifies development by giving developers the ability to quickly prototype, test, and deploy their applications.
 
