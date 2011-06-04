@@ -1,6 +1,9 @@
 Riak Cookbook for Scalarium
 =========
 
+Based on the excellent work of [Scott Likens](http://github.com/damm). He wrote this cookbook to automate Riak on the EY
+AppCloud, and I blatantly copied his work an adapted it to work on [Scalarium](http://scalarium.com). Thanks, Scott!
+
 [Riak][1] is a Dynamo-inspired key/value store that scales predictably and easily. Riak also simplifies development by giving developers the ability to quickly prototype, test, and deploy their applications.
 
 A truly fault-tolerant system, Riak has no single point of failure. No machines are special or central in Riak, so developers and operations professionals can decide exactly how fault-tolerant they want and need their applications to be.
@@ -44,6 +47,5 @@ How to get Support
 * [Twitter me](http://twitter.com/roidrage)
 
 * Additionally because of that there is *NO SUPPORT* for this recipe by Scalarium at this time.  If you have any problems with this reciple please open an issue, add a comment.  If you open a ticket regarding this cookbook you will be directed to this Github repository to open an issue.
-
 
 [1]: http://wiki.basho.com
