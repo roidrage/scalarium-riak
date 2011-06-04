@@ -7,7 +7,7 @@ gem_package "i18n" do
 end
 
 gem_package "ripple" do
-  version "0.9.3"
+  version "0.9.4"
   action :install
 end
 
