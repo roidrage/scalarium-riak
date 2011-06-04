@@ -1,7 +1,7 @@
 # Configure stuff goes here
 #
 
-template "/data/riak/etc/vm.args" do
+template "/etc/riak/vm.args" do
   source "vm.args.erb"
   owner node[:owner_name]
   group node[:owner_name]
@@ -9,7 +9,7 @@ template "/data/riak/etc/vm.args" do
   backup 0
 end
 
-template "/data/riak/etc/app.config" do
+template "/etc/riak/app.config" do
   source "app.config.erb"
   backup 0
   mode 0655

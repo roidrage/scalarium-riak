@@ -16,18 +16,12 @@ gem_package "curb" do
   action :install
 end
 
-remote_file "/mnt/src/riak-#{node[:riak][:version]}.tar.gz" do
-  source "http://downloads.basho.com/riak/CURRENT/riak-#{node[:riak][:version]}.tar.gz"
+remote_file "/tmp/riak-#{node[:riak][:version]}-1_amd64.deb" do
+  source "http://downloads.basho.com/riak/CURRENT/riak-#{node[:riak][:version]}-1_amd64.deb"
   backup 0
-  not_if { FileTest.exists?("/mnt/src/riak-#{node[:riak][:version]}.tar.gz") }
+  not_if { FileTest.exists?("/tmp/riak-#{node[:riak][:version]}-1_amd64.deb") }
 end
 
-execute "untar riak" do
-  command "cd /mnt/src;tar zxf riak-#{node[:riak][:version]}.tar.gz"
-  not_if { FileTest.directory?("/mnt/src/riak-#{node[:riak][:version]}") }
-end
-
-execute "make all rel" do
-  command "cd /mnt/src/riak-#{node[:riak][:version]};make all rel && cp -prv rel/riak /data/riak"
-  not_if { FileTest.exists?("/data/riak/bin/riak") }
+dpkg_package do
+  name "/tmp/riak-#{node[:riak][:version]}-1_amd64.deb"
 end
