@@ -16,12 +16,14 @@ gem_package "curb" do
   action :install
 end
 
-remote_file "/tmp/riak-#{node[:riak][:version]}-1_amd64.deb" do
-  source "http://downloads.basho.com/riak/CURRENT/riak-#{node[:riak][:version]}-1_amd64.deb"
+arch = RUBY_PLATFORM.match(/64/) ? 'amd64' : 'i386'
+
+remote_file "/tmp/riak-#{node[:riak][:version]}-1_#{arch}.deb" do
+  source "http://downloads.basho.com/riak/CURRENT/riak-#{node[:riak][:version]}-1_#{arch}.deb"
   backup 0
-  not_if { FileTest.exists?("/tmp/riak-#{node[:riak][:version]}-1_amd64.deb") }
+  not_if { FileTest.exists?("/tmp/riak-#{node[:riak][:version]}-1_#{arch}.deb") }
 end
 
 dpkg_package do
-  name "/tmp/riak-#{node[:riak][:version]}-1_amd64.deb"
+  name "/tmp/riak-#{node[:riak][:version]}-1_#{arch}.deb"
 end
