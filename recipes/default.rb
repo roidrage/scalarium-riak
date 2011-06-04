@@ -1,5 +1,3 @@
-package "erlang"
-
 include_recipe "riak::install_riak"
 include_recipe "riak::configure_riak"
 include_recipe "riak::start_riak"
