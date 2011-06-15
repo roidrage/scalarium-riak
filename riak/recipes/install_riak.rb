@@ -32,6 +32,14 @@ remote_file "/tmp/riak_#{node[:riak][:version]}-1_#{arch}.deb" do
   not_if { FileTest.exists?("/tmp/riak_#{node[:riak][:version]}-1_#{arch}.deb") }
 end
 
+directory "#{node[:riak][:datadir]}/ring" do
+  action :create
+end
+
+directory "#{node[:bitcask][:data_root]}" do
+  action :create
+end
+
 dpkg_package "riak" do
   source "/tmp/riak_#{node[:riak][:version]}-1_#{arch}.deb"
 end
