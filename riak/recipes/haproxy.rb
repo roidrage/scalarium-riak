@@ -8,7 +8,7 @@ node[:scalarium][:roles][:riak][:instances].each do |name, instance|
   riak_instances << instance[:public_dns_name]
 end
 
-template "/etc/haproxy_riak.cfg" do
+template "/etc/haproxy/haproxy.cfg" do
   owner 'root'
   group 'root'
   mode 0644
@@ -20,14 +20,14 @@ template "/etc/haproxy_riak.cfg" do
   })
 end
 
-template "/etc/monit.d/haproxy_riak.monitrc" do
+template "/etc/monit/conf.d/haproxy_riak.monitrc" do
   source "haproxy_monitrc.erb"
   backup 0
   owner "root"
   group "root"
   mode 0655
   variables(
-    :pidfile => "/var/run/haproxy_riak.pid"
+    :pidfile => "/var/run/haproxy.pid"
   )
 end
 
