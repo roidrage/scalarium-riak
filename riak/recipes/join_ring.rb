@@ -8,7 +8,7 @@ end
 
 Chef::Log.info("Instances: #{riak_instances.size}")
 
-if riak_instances.empty? or riak_instances.size == 1 and riak_instances.include?(node[:scalarium][:instance][:public_dns_name])
+if riak_instances.size == 0 or (riak_instances.size == 1 and riak_instances.include?(node[:scalarium][:instance][:public_dns_name]))
   Chef::Log.info "I'm the only instance in this cluster. No need to join. Forever alone."
 else
   srand
