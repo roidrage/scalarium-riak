@@ -6,7 +6,7 @@ node[:scalarium][:roles][:riak][:instances].each do |name, instance|
   riak_instances << instance[:public_dns_name]
 end
 
-Chef::Log.info("Instances: #{riak_instances.inspect}")
+Chef::Log.info("Instances: #{riak_instances.size}")
 
 if riak_instances.empty? or riak_instances.size == 1 and riak_instances.include?(node[:scalarium][:instance][:public_dns_name])
   Chef::Log.info "I'm the only instance in this cluster. No need to join. Forever alone."
