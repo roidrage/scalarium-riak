@@ -35,11 +35,22 @@ end
 directory "#{node[:riak][:data_dir]}/ring" do
   action :create
   recursive true
+  user "riak"
+  group "riak"
 end
 
 directory "#{node[:bitcask][:data_root]}" do
   action :create
   recursive true
+  owner "riak"
+  group "riak"
+end
+
+directory "/usr/lib/riak/data/mr_queue" do
+  action :create
+  recursive true
+  owner "riak"
+  group "riak"
 end
 
 dpkg_package "riak" do
