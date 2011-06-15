@@ -29,11 +29,15 @@ This Cookbook automates the creation (join) action of a Riak 'Ring' on Scalarium
 Specifics of Usage
 --------
 
+It is recommended to run Riak on a Ubuntu 9.10 cluster, not on 10.04 LTS, which Scalarium does support, but which is
+known for a good pile of bugs particularly affecting long-running and network-intensive processes like Riak.
+
 Create a custom role in Scalarium, its short name is expected to be "riak" (without the quotes).
 
 * Add "riak" as a custom setup recipe to the role.
 * Add "riak::haproxy" as custom configure recipe.
-* Give them EBS storage mounted on /vol/riak.
+* Give them EBS storage mounted on /vol/riak. You don't have to do that, and can just use the ephemeral storage instead
+  though, but be sure to change the data directories accordingly.
 * Don't forget to assign Elastic IPs, starting stopping instances without them will mess up your ring.
 * Add instances, start them, boom!
 
