@@ -48,6 +48,6 @@ ruby_block "sleep 1" do
   end
 end
 
-execute "monit -v restart -g haproxy_riak" do
+execute "monit restart -g haproxy_riak" do
   action :run
 end
