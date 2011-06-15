@@ -37,6 +37,8 @@ Create a custom role in Scalarium, its short name is expected to be "riak" (with
 * Don't forget to assign Elastic IPs, starting stopping instances without them will mess up your ring.
 * Add instances, start them, boom!
 
+NOTE: Stopping instances does NOT remove them from the cluster. Use `riak-admin leave` or `riak-admin remove` to decommission them explicitly.
+
 * Lastly, Words of Wisdom from Basho themselves.
 
 > you should look at the ring ready command and make it returns 0 before adding the next node
@@ -52,6 +54,6 @@ How to get Support
 * [Twitter me](http://twitter.com/roidrage)
 * Email: <mathias@basho.com>
 
-* Additionally because of that there is *NO SUPPORT* for this recipe by Scalarium at this time.  If you have any problems with this reciple please open an issue, add a comment.  If you open a ticket regarding this cookbook you will be directed to this Github repository to open an issue.
+* Additionally because of that there is *NO SUPPORT* for this recipe by Scalarium at this time.  If you have any problems with this recipe please open an issue, add a comment.  If you open a ticket regarding this cookbook you will be directed to this Github repository to open an issue.
 
 [1]: http://wiki.basho.com
