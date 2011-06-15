@@ -32,6 +32,10 @@ remote_file "/tmp/riak_#{node[:riak][:version]}-1_#{arch}.deb" do
   not_if { FileTest.exists?("/tmp/riak_#{node[:riak][:version]}-1_#{arch}.deb") }
 end
 
+dpkg_package "riak" do
+  source "/tmp/riak_#{node[:riak][:version]}-1_#{arch}.deb"
+end
+
 directory "#{node[:riak][:data_dir]}/ring" do
   action :create
   recursive true
@@ -51,8 +55,4 @@ directory "/usr/lib/riak/data/mr_queue" do
   recursive true
   owner "riak"
   group "riak"
-end
-
-dpkg_package "riak" do
-  source "/tmp/riak_#{node[:riak][:version]}-1_#{arch}.deb"
 end
