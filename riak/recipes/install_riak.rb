@@ -34,10 +34,12 @@ end
 
 directory "#{node[:riak][:datadir]}/ring" do
   action :create
+  recursive true
 end
 
 directory "#{node[:bitcask][:data_root]}" do
   action :create
+  recursive true
 end
 
 dpkg_package "riak" do
