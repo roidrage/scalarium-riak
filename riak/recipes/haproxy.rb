@@ -34,3 +34,7 @@ end
 execute "monit reload -g haproxy_riak" do
   action :run
 end
+
+execute "monit restart -g haproxy_riak" do
+  action :run
+end
