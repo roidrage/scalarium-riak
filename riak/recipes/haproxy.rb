@@ -31,8 +31,11 @@ template "/etc/monit/conf.d/haproxy_riak.monitrc" do
   )
 end
 
-service "haproxy" do
-  action :enable
+template "/etc/default/haproxy" do
+    source "haproxy-default.erb"
+    owner "root"
+    group "root"
+    mode 0644
 end
 
 execute "monit reload -g haproxy_riak" do
