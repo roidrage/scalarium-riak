@@ -32,16 +32,22 @@ template "/etc/monit/conf.d/haproxy_riak.monitrc" do
 end
 
 template "/etc/default/haproxy" do
-    source "haproxy-default.erb"
-    owner "root"
-    group "root"
-    mode 0644
+  source "haproxy-default.erb"
+  owner "root"
+  group "root"
+  mode 0644
 end
 
-execute "monit reload -g haproxy_riak" do
+execute "monit reload" do
   action :run
 end
 
-execute "monit restart -g haproxy_riak" do
+ruby_block "sleep 1" do
+  block do
+    sleep 1
+  end
+end
+
+execute "monit -v restart -g haproxy_riak" do
   action :run
 end
