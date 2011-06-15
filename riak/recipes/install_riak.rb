@@ -35,7 +35,7 @@ end
 directory "#{node[:riak][:data_dir]}/ring" do
   action :create
   recursive true
-  user "riak"
+  owner "riak"
   group "riak"
 end
 
