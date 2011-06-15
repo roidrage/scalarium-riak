@@ -18,8 +18,8 @@ Design
 --------
 
 * 2-3+ instances (m1.large or larger)
-* Riak 0.14 with Bitcask
-* haproxy on each app instance listening on port 8098 directing to the Riak instances.
+* Riak 0.14.2 with Bitcask
+* haproxy on each app instance listening on port 8198 (HTTP) and 8187 (PBC) directing to the Riak instances.
 
 Notes
 --------
@@ -31,7 +31,11 @@ Specifics of Usage
 
 Create a custom role in Scalarium, its short name is expected to be "riak" (without the quotes).
 
-Add "riak" as a custom recipe to the role. Add instances, start them, boom!
+* Add "riak" as a custom setup recipe to the role.
+* Add "riak::haproxy" as custom configure recipe.
+* Give them EBS storage mounted on /vol/riak.
+* Don't forget to assign Elastic IPs, starting stopping instances without them will mess up your ring.
+* Add instances, start them, boom!
 
 * Lastly, Words of Wisdom from Basho themselves.
 
@@ -46,6 +50,7 @@ How to get Support
 * irc://irc.freenode.net/#riak
 * This Github repository.
 * [Twitter me](http://twitter.com/roidrage)
+* Email: <mathias@basho.com>
 
 * Additionally because of that there is *NO SUPPORT* for this recipe by Scalarium at this time.  If you have any problems with this reciple please open an issue, add a comment.  If you open a ticket regarding this cookbook you will be directed to this Github repository to open an issue.
 
