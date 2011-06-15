@@ -13,7 +13,7 @@ else
   riak_instances.delete(node[:scalarium][:instance][:hostname])
   riak_hostname = riak_instances[rand(riak_instances.size)]
 
-  ruby_block do
+  ruby_block "join riak ring" do
     block do
       ring_ready = false
       while not ring_ready
