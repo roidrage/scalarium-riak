@@ -2,6 +2,7 @@ riak :version => "0.14.2",
      :js_vm_count => "8",
      :js_max_vm_mem => "8",
      :data_dir => "/vol/riak/data"
+     :cluster_name => node[:scalarium][:cluster][:name].downcase.gsub(/[^[:alnum:]]/,'-').gsub(/-{2,}/,'-').gsub(/[^[:alnum:]]+$/, '')
 luwak :enabled => "true"
 bitcask :max_file_size => "16#80000000",
         :open_timeout => 4,
