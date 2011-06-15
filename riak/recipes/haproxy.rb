@@ -31,6 +31,10 @@ template "/etc/monit/conf.d/haproxy_riak.monitrc" do
   )
 end
 
+service "haproxy" do
+  action :enable
+end
+
 execute "monit reload -g haproxy_riak" do
   action :run
 end
