@@ -1,7 +1,7 @@
 check process haproxy-riak
   with pidfile <%= @pidfile %>
-  start program = "/usr/bin/haproxy -D -p /var/run/haproxy_riak.pid -f /etc/haproxy_riak.cfg" with timeout 60 seconds
-  stop program = "/bin/bash -c '/bin/kill `cat /var/run/haproxy_riak.pid` && sleep 5&& monit quit'" with timeout 60 seconds
+  start program = "/etc/init.d/haproxy start" with timeout 60 seconds
+  stop program = "/etc/init.d/haproxy stop" with timeout 60 seconds
   if mem > 512.0 MB for 2 cycles then restart
   if cpu > 100% for 2 cycles then restart
   group haproxy_riak
