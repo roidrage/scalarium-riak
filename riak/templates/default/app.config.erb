@@ -97,7 +97,8 @@
               {flush_log_at_trx_commit, <%= @innostore[:flush_log_at_trx_commit] %>},
               {data_home_dir, "<%= @innostore[:data_home_dir] %>"},
               {log_group_home_dir, "<%= @innostore[:log_group_home_dir]%>"},
-              {buffer_pool_size, <%= @innostore[:buffer_pool_size] %>}
+              {buffer_pool_size, <%= @innostore[:buffer_pool_size] %>},
+              {flush_method, "<%= @innostore[:flush_method] %>"}
              ]},
 <% end %>
  %% Luwak Config

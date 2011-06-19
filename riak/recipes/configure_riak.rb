@@ -37,6 +37,8 @@ template "/etc/riak/app.config" do
     :storage_backend => node[:riak][:storage_backend],
     :disable_http_nagle => node[:riak][:disable_http_nagle],
     :erlang_paths => node[:riak][:erlang_paths],
-    :vnode_mr_timeout => node[:riak][:vnode_mr_timeout]
+    :vnode_mr_timeout => node[:riak][:vnode_mr_timeout],
+    :innostore => node[:innostore],
+    :bitcask => node[:bitcask]
   )
 end
