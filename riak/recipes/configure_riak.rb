@@ -30,6 +30,13 @@ template "/etc/riak/app.config" do
     :expiry_secs => node[:bitcask][:expiry_secs],
     :data_root => node[:bitcask][:data_root],
     :luwak => node[:luwak][:enabled],
-    :data_dir => node[:riak][:data_dir]
+    :data_dir => node[:riak][:data_dir],
+    :js_thread_stack => node[:riak][:js_thread_stack],
+    :map_cache_size => node[:riak][:map_cache_size],
+    :mapper_batch_size => node[:riak][:mapper_batch_size],
+    :storage_backend => node[:riak][:storage_backend],
+    :disable_http_nagle => node[:riak][:disable_http_nagle],
+    :erlang_paths => node[:riak][:erlang_paths],
+    :vnode_mr_timeout => node[:riak][:vnode_mr_timeout]
   )
 end
