@@ -89,7 +89,7 @@
             {small_file_threshold, <%= @small_file_threshold %>},
             {expiry_secs, <%= @expiry_secs %>}
            ]},
-<% elsif @storage_backend == "innostore_riak" -%>
+<% elsif @storage_backend == "riak_kv_innostore_backend" -%>
  {innostore, [
               {log_buffer_size, <%= @innostore[:log_buffer_size] %>},
               {log_files_in_group, <%= @innostore[:log_files_in_group] %>},

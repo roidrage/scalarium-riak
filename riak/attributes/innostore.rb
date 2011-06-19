@@ -1,4 +1,4 @@
-if node[:riak][:storage_backend] == "innostore_riak"
+if node[:riak][:storage_backend] == "riak_kv_innostore_backend"
   innostore :log_buffer_size => 8388608,
             :log_files_in_group => 8,
             :log_file_size => 1073741824, # 1 GB default
