@@ -34,5 +34,5 @@ default[:innostore][:flush_log_at_trx_commit] = 1
 default[:innostore][:data_home_dir] = "#{node[:riak][:data_dir]}/innodb"
 default[:innostore][:log_group_home_dir] = "#{node[:riak][:data_dir]}/innodb"
 default[:innostore][:buffer_pool_size] = 2147483648
-default[:innostore][:version] => "1.0.2"
+default[:innostore][:version] = "1.0.2"
 default[:innostore][:flush_method] = "O_DIRECT"
