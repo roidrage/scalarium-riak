@@ -1,3 +1,5 @@
+include_attribute "riak"
+
 riak :version => "0.14.2",
      :js_vm_count => "8",
      :js_thread_stack => "16",

@@ -9,6 +9,8 @@ template "/etc/riak/vm.args" do
   backup 0
 end
 
+Chef::Log.info("Storage backend: #{node[:riak][:storage_backend]}")
+
 template "/etc/riak/app.config" do
   source "app.config.erb"
   backup 0
