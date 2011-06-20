@@ -1,6 +1,3 @@
-# Installer stuff here
-#
-
 gem_package "i18n" do
   version "0.5.0"
   action :install

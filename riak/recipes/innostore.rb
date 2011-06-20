@@ -13,5 +13,7 @@ end
 directory node[:innostore][:data_home_dir] do
   action :create
   recursive true
+  owner "riak"
+  group "riak"
 end
 
