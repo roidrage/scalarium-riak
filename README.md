@@ -50,6 +50,22 @@ NOTE: Stopping instances does NOT remove them from the cluster. Use `riak-admin 
 > and sometimes it takes a minute or two to converge the ring
 > changing the gossip interval in the conf alleviates this somewhat
 
+Storage Backends
+--------
+
+The cookbooks default to using [Bitcask](https://github.com/basho/bitcask), but include support for
+[Innostore](https://github.com/basho/innostore) as well.  To use the latter, specify a custom JSON for your cloud like
+so:
+
+    {
+      "riak": {
+        "storage_backend": "riak_kv_innostore_backend"
+      }
+    }
+
+This will make sure that Innostore is both installed and configured properly for use with Riak. See the attributes file
+for details on the available options.
+
 How to get Support
 --------
 
