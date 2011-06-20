@@ -10,3 +10,8 @@ dpkg_package "innostore" do
   source "/tmp/innostore_#{node[:innostore][:version]}-2_#{arch}.deb"
 end
 
+directory node[:innostore][:data_home_dir] do
+  action :create
+  recursive true
+end
+

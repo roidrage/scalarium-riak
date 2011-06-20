@@ -29,10 +29,10 @@ default[:bitcask][:data_root] = "#{node[:riak][:data_dir]}/bitcask"
 
 default[:innostore][:log_buffer_size] = 8388608
 default[:innostore][:log_files_in_group] = 8
-default[:innostore][:log_file_size] = 1073741824 # 1 GB default
+default[:innostore][:log_file_size] = 536870912 # 1 GB default
 default[:innostore][:flush_log_at_trx_commit] = 1
 default[:innostore][:data_home_dir] = "#{node[:riak][:data_dir]}/innodb"
 default[:innostore][:log_group_home_dir] = "#{node[:riak][:data_dir]}/innodb"
 default[:innostore][:buffer_pool_size] = 2147483648
-default[:innostore][:version] = "1.0.2"
+default[:innostore][:version] => "1.0.2"
 default[:innostore][:flush_method] = "O_DIRECT"
