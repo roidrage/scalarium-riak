@@ -1,8 +1,8 @@
 ## Name of the riak node
--name riak@<%= @node[:scalarium][:instance][:public_dns_name] %>
+-name riak@<%= node[:riak][:node_name] %>
 
 ## Cookie for distributed erlang
--setcookie riak<%= @node[:riak][:cookie_name] %>
+-setcookie riak<%= node[:riak][:cookie_name] %>
 
 ## Heartbeat management; auto-restarts VM if it dies or becomes unresponsive
 ## (Disabled by default..use with caution!)

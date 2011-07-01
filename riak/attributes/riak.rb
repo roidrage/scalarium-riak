@@ -12,6 +12,11 @@ default[:riak][:mapper_batch_size] = "5"
 default[:riak][:storage_backend] = "riak_kv_bitcask_backend"
 default[:riak][:erlang_paths] = nil
 default[:riak][:vnode_mr_timeout] = 1000
+if node[:scalarium][:instance][:public_dns_name].empty?
+  default[:riak][:node_name] = node[:ec2][:public_hostname]
+else
+  default[:riak][:node_name] = node[:scalarium][:instance][:public_dns_name]
+end
 
 default[:luwak][:enabled] = "true"
 
