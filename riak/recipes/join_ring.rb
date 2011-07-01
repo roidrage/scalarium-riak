@@ -15,16 +15,7 @@ else
   riak_instances.delete(node[:scalarium][:instance][:hostname])
   riak_hostname = riak_instances[rand(riak_instances.size)]
 
-  ruby_block "join riak ring" do
-    block do
-      ring_ready = false
-      while not ring_ready
-        ring_ready = system('riak-admin ringready')
-        sleep 5 if not ring_ready
-      end
-    end
-  end
-
+  Chef::Log.info "Joining cluster at node #{riak_hostname}"
   execute "riak-admin join riak@#{riak_hostname}" do
     action :run
   end
