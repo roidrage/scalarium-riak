@@ -23,9 +23,11 @@ else
         sleep 5 if not ring_ready
       end
     end
+    not_if { Dir.glob("#{node[:riak][:data_dir]}/ring/riak_core_ring.default*").any? }
   end
 
   execute "riak-admin join riak@#{riak_hostname}" do
     action :run
+    not_if { Dir.glob("#{node[:riak][:data_dir]}/ring/riak_core_ring.default*").any? }
   end
 end
