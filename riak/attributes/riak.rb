@@ -15,6 +15,7 @@ default[:riak][:vnode_mr_timeout] = 1000
 default[:riak][:ring_creation_size] = 64
 
 if node[:scalarium][:instance][:public_dns_name].empty?
+  Chef::Log.info("Scalarium host name is empty, using EC2 meta data: #{node[:ec2][:public_hostname]}")
   default[:riak][:node_name] = node[:ec2][:public_hostname]
 else
   default[:riak][:node_name] = node[:scalarium][:instance][:public_dns_name]
