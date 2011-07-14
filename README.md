@@ -36,6 +36,8 @@ Create a custom role in Scalarium, its short name is expected to be "riak" (with
 
 * Add "riak" as a custom setup recipe to the role.
 * Add "riak::haproxy" as custom configure recipe.
+* If you want to use Riak Search, you can enable it using custom JSON, setting
+  the `node[:riak][:search_enabled]` attribute to true.
 * Give them EBS storage mounted on /vol/riak. You don't have to do that, and can just use the ephemeral storage instead though, but be sure to change the data directories accordingly. To use ephemeral storage, make sure to set the attribute `node[:volumes][:riak]` to e.g. `/mnt/riak` as part of your cloud's custom JSON. That'll make sure the data will actually end up on the large partition of the ephemeral storage, otherwise `/vol/riak` will be created on the root partition, which is only a couple of gigabytes in size.
 * Don't forget to assign Elastic IPs, starting stopping instances without them will mess up your ring.
 * Add instances, start them, boom!
