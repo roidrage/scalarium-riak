@@ -1,5 +1,10 @@
 default[:volumes][:riak] = '/vol/riak'
 default[:riak][:version] = "0.14.2"
+if node[:riak][:search_enabled]
+  default[:riak][:package] = "riak-search"
+else
+  default[:riak][:package] = "riak"
+end
 default[:riak][:js_vm_count] = "8"
 default[:riak][:js_thread_stack] = "16"
 default[:riak][:js_max_vm_mem] = "8"

@@ -23,14 +23,14 @@ end
 
 arch = RUBY_PLATFORM.match(/64/) ? 'amd64' : 'i386'
 
-remote_file "/tmp/riak_#{node[:riak][:version]}-1_#{arch}.deb" do
-  source "http://downloads.basho.com/riak/CURRENT/riak_#{node[:riak][:version]}-1_#{arch}.deb"
+remote_file "/tmp/#{node[:riak][:package]}_#{node[:riak][:version]}-1_#{arch}.deb" do
+  source "http://downloads.basho.com/#{node[:riak][:package]}/CURRENT/#{node[:riak][:package]}_#{node[:riak][:version]}-1_#{arch}.deb"
   backup 0
-  not_if { FileTest.exists?("/tmp/riak_#{node[:riak][:version]}-1_#{arch}.deb") }
+  not_if { FileTest.exists?("/tmp/#{node[:riak][:package]}_#{node[:riak][:version]}-1_#{arch}.deb") }
 end
 
 dpkg_package "riak" do
-  source "/tmp/riak_#{node[:riak][:version]}-1_#{arch}.deb"
+  source "/tmp/#{node[:riak][:package]}_#{node[:riak][:version]}-1_#{arch}.deb"
 end
 
 directory "#{node[:riak][:data_dir]}/ring" do
