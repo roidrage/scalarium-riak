@@ -118,7 +118,7 @@
          ]}
 
 <% if node[:riak][:search_enabled] %>
- {riak_search, [
+ ,{riak_search, [
                 {search_backend, merge_index_backend},
                 {java_home, "/usr"},
                 {max_search_results, 100000}
@@ -156,9 +156,7 @@
                 {segment_values_staging_size, 1000},
                 {segment_values_compression_threshold, 0},
                 {segment_values_compression_level, 1}
-               ]},
-
-
+               ]}
 <% end %>
 ].
 
