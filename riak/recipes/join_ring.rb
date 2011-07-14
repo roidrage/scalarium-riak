@@ -23,7 +23,12 @@ else
 
   Chef::Log.info "Joining cluster at node #{riak_hostname}"
 
-  execute "riak-admin join riak@#{riak_hostname}" do
+  riak_admin = if node[:riak][:search_enabled]
+                 "riaksearch-admin"
+               else
+                 "riak-admin"
+               end
+  execute "#{riak_admin} join riak@#{riak_hostname}" do
     action :run
   end
 end
