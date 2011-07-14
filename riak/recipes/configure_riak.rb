@@ -1,7 +1,13 @@
 # Configure stuff goes here
 #
 
-template "/etc/riak/vm.args" do
+vm_args, app_config = if node[:riak][:search_enabled]
+               "/etc/riaksearch/vm.args", "/etc/riaksearch/app.config"
+             else
+               "/etc/riak/vm.args", "/etc/riak/vm.args"
+             end
+
+template vm_args do
   source "vm.args.erb"
   owner node[:owner_name]
   group node[:owner_name]
@@ -11,7 +17,7 @@ end
 
 Chef::Log.info("Storage backend: #{node[:riak][:storage_backend]}")
 
-template "/etc/riak/app.config" do
+template app_config do
   source "app.config.erb"
   backup 0
   mode 0655

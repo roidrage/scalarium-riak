@@ -47,6 +47,15 @@ directory "#{node[:bitcask][:data_root]}" do
   group "riak"
 end
 
+if node[:riak][:search_enabled]
+  directory "#{node[:riak][:data_dir]}/merge_index" do
+    action :create
+    recursive true
+    owner "riak"
+    group "riak"
+  end
+end
+
 directory "/usr/lib/riak/data/mr_queue" do
   action :create
   recursive true
