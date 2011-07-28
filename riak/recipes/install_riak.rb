@@ -1,26 +1,3 @@
-gem_package "i18n" do
-  version "0.5.0"
-  action :install
-end
-
-gem_package "ripple" do
-  version "0.9.5"
-  action :install
-end
-
-package "libcurl3" do
-  action :install
-end
-
-package "libcurl4-openssl-dev" do
-  action :install
-end
-
-gem_package "curb" do
-  version "0.7.15"
-  action :install
-end
-
 arch = RUBY_PLATFORM.match(/64/) ? 'amd64' : 'i386'
 
 remote_file "/tmp/#{node[:riak][:package]}_#{node[:riak][:version]}-1_#{arch}.deb" do
