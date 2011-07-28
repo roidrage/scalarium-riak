@@ -119,10 +119,10 @@
 
 <% if node[:riak][:search_enabled] %>
  ,{riak_search, [
-                {search_backend, merge_index_backend},
-                {java_home, "/usr"},
-                {max_search_results, 100000}
-               ]},
+                 {search_backend, merge_index_backend},
+                 {java_home, "/usr"},
+                 {max_search_results, <%= node[:riak][:search][:max_search_results] %>}
+                ]},
  {qilr, [
          %% NOTE: Change with 0.14 release: by default, JVM text analyzer is
          %% disabled via missing/commented 'analysis_port' option or
@@ -130,12 +130,12 @@
          %% Uncomment the following line in order to use JVM Lucene-based text analyzers.
          %% {analysis_port, 6095 },
          
-         {backend_conn_count, 50 }
+         {backend_conn_count, 50}
         ]},
 
  {riak_solr, [
-              {solr_name, "solr"},
-              {default_schema, "search"}
+              {solr_name, "<%= node[:riak][:search][:solr_name] %>"},
+              {default_schema, "<%= node[:riak][:search][:default_schema] %>"}
              ]},
 
  %% Merge Index Config
