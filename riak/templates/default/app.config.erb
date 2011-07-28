@@ -119,43 +119,43 @@
 
 <% if node[:riak][:search_enabled] %>
  ,{riak_search, [
-                 {search_backend, <%= node[:riak][:search][:search_backend]},
-                 {java_home, "/usr"},
-                 {max_search_results, <%= node[:riak][:search][:max_search_results] %>}
-                ]},
+                {search_backend, merge_index_backend},
+                {java_home, "/usr"},
+                {max_search_results, 100000}
+               ]},
  {qilr, [
          %% NOTE: Change with 0.14 release: by default, JVM text analyzer is
          %% disabled via missing/commented 'analysis_port' option or
          %% via {analysis_port, undefined}. 
          %% Uncomment the following line in order to use JVM Lucene-based text analyzers.
          %% {analysis_port, 6095 },
-,        
-         {backend_conn_count, 50}
+         
+         {backend_conn_count, 50 }
         ]},
 
  {riak_solr, [
-              {solr_name, "<%= node[:riak][:search][:solr_name] %>"},
-              {default_schema, "<%= node[:riak][:search][:default_schema] %>"}
+              {solr_name, "solr"},
+              {default_schema, "search"}
              ]},
 
  %% Merge Index Config
  {merge_index, [
-                {data_root, "<%= node[:riak][:search][:data_root]"},
-                {buffer_rollover_size, <%= node[:riak][:search][:buffer_rollover_size] %>},
-                {buffer_delayed_write_size, <%= node[:riak][:search][:buffer_delayed_write_size] %>},
-                {buffer_delayed_write_ms, <%= node[:riak][:search][:buffer_delayed_write_ms] %>},
-                {max_compact_segments, <%= node[:riak][:search][:max_compact_segments] %>},
-                {fold_batch_size, <%= node[:riak][:search][:fold_batch_size] %>},
-                {segment_query_read_ahead_size, <%= node[:riak][:search][:segment_query_read_ahead_size] %>},
-                {segment_compaction_read_ahead_size, <%= node[:riak][:search][:segment_compaction_read_ahead_size] %>},
-                {segment_file_buffer_size, <%= node[:riak][:search][:segment_file_buffer_size] %>},
-                {segment_delayed_write_size, <%= node[:riak][:search][:segment_delayed_write_size] %>},
-                {segment_delayed_write_ms, <%= node[:riak][:search][:segment_delayed_write_ms] %>},
-                {segment_full_read_size, <%= node[:riak][:search][:segment_full_read_size] %>},
-                {segment_block_size, <%= node[:riak][:search][:segment_block_size] %>},
-                {segment_values_staging_size, <%= node[:riak][:search][:segment_values_staging_size] %>},
-                {segment_values_compression_threshold, <%= node[:riak][:search][:segment_values_compression_threshold] %>},
-                {segment_values_compression_level, <%= node[:riak][:search][:segment_values_compression_level] %>}
+                {data_root, "<%= @data_dir %>/merge_index"},
+                {buffer_rollover_size, 1048576},
+                {buffer_delayed_write_size, 524288},
+                {buffer_delayed_write_ms, 2000},
+                {max_compact_segments, 20},
+                {fold_batch_size, 100},
+                {segment_query_read_ahead_size, 65536},
+                {segment_compaction_read_ahead_size, 5242880},
+                {segment_file_buffer_size, 20971520},
+                {segment_delayed_write_size, 20971520},
+                {segment_delayed_write_ms, 10000},
+                {segment_full_read_size, 5242880},
+                {segment_block_size, 32767},
+                {segment_values_staging_size, 1000},
+                {segment_values_compression_threshold, 0},
+                {segment_values_compression_level, 1}
                ]}
 <% end %>
 ].
