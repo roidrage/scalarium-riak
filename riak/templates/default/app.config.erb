@@ -119,7 +119,7 @@
 
 <% if node[:riak][:search_enabled] %>
  ,{riak_search, [
-                 {search_backend, merge_index_backend},
+                 {search_backend, <%= node[:riak][:search][:search_backend] %>},
                  {java_home, "/usr"},
                  {max_search_results, <%= node[:riak][:search][:max_search_results] %>}
                 ]},
@@ -140,7 +140,7 @@
 
  %% Merge Index Config
  {merge_index, [
-                {data_root, "<%= @data_dir %>/merge_index"},
+                {data_root, "<%= node[:riak][:search][:data_root] %>"},
                 {buffer_rollover_size, 1048576},
                 {buffer_delayed_write_size, 524288},
                 {buffer_delayed_write_ms, 2000},
