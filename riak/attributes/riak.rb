@@ -49,3 +49,25 @@ default[:innostore][:log_group_home_dir] = "#{node[:riak][:data_dir]}/innodb"
 default[:innostore][:buffer_pool_size] = 2147483648
 default[:innostore][:version] = "1.0.2"
 default[:innostore][:flush_method] = "O_DIRECT"
+
+default[:riak][:search][:data_root] = "#{node[:riak][:data_dir]}/merge_index"
+default[:riak][:search][:max_search_results] = 100000
+default[:riak][:search][:solr_name] = "solr"
+default[:riak][:search][:default_schema] = "search"
+default[:riak][:search][:search_backend] = "merge_index_backend"
+
+default[:riak][:search][:buffer_rollover_size] = 1048576
+default[:riak][:search][:buffer_delayed_write_size] = 524288
+default[:riak][:search][:buffer_delayed_write_ms] = 2000
+default[:riak][:search][:max_compact_segments] = 20
+default[:riak][:search][:fold_batch_size] = 100
+default[:riak][:search][:segment_query_read_ahead_size] = 65536
+default[:riak][:search][:segment_compaction_read_ahead_size] = 5242880
+default[:riak][:search][:segment_file_buffer_size] = 20971520
+default[:riak][:search][:segment_delayed_write_size] = 20971520
+default[:riak][:search][:segment_delayed_write_ms] = 10000
+default[:riak][:search][:segment_full_read_size] = 5242880
+default[:riak][:search][:segment_block_size] = 32767
+default[:riak][:search][:segment_values_staging_size] = 1000
+default[:riak][:search][:segment_values_compression_threshold] = 0
+default[:riak][:search][:segment_values_compression_level] = 1
