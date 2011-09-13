@@ -1,7 +1,7 @@
 arch = RUBY_PLATFORM.match(/64/) ? 'amd64' : 'i386'
 
 remote_file "/tmp/#{node[:riak][:package]}_#{node[:riak][:version]}-1_#{arch}.deb" do
-  source "http://downloads.basho.com/#{node[:riak][:package]}/CURRENT/#{node[:riak][:package]}_#{node[:riak][:version]}-1_#{arch}.deb"
+  source "http://downloads.basho.com/#{node[:riak][:package]}/riak-#{node[:riak][:version]}/#{node[:riak][:package]}_#{node[:riak][:version]}-1_#{arch}.deb"
   backup 0
   not_if { FileTest.exists?("/tmp/#{node[:riak][:package]}_#{node[:riak][:version]}-1_#{arch}.deb") }
 end
