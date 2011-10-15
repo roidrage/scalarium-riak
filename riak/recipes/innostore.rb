@@ -1,5 +1,5 @@
 arch = RUBY_PLATFORM.match(/64/) ? 'x86_64' : 'i686'
-tgz = "/tmp/innostore-#{node[:innostore][:version]}-deb-#{arch}.tar.gz"
+tgz = "/tmp/innostore-#{node[:innostore][:version]}-1-deb-#{arch}.tar.gz"
 remote_file tgz do
   source "http://downloads.basho.com/innostore/innostore-#{node[:innostore][:version]}/#{File.basename(tgz)}"
   backup 0
