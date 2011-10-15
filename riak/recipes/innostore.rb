@@ -10,7 +10,9 @@ execute "tar xvfz #{tgz}" do
   cwd "/usr/lib/riak/lib"
 end
 
-execute "chown -R riak.riak innostore-#{node[:innostore][:version]}"
+execute "chown -R riak.riak innostore-#{node[:innostore][:version]}" do
+  cwd "/usr/lib/riak/lib"
+end
 
 directory node[:innostore][:data_home_dir] do
   action :create
