@@ -4,7 +4,7 @@
 vm_args, app_config = if node[:riak][:search_enabled]
                ["/etc/riaksearch/vm.args", "/etc/riaksearch/app.config"]
              else
-               ["/etc/riak/vm.args", "/etc/riak/vm.args"]
+               ["/etc/riak/vm.args", "/etc/riak/app.config"]
              end
 
 template vm_args do
