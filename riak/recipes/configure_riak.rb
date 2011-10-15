@@ -48,7 +48,7 @@ template app_config do
     :vnode_mr_timeout => node[:riak][:vnode_mr_timeout],
     :innostore => node[:innostore],
     :bitcask => node[:bitcask],
-    :leveldb => node[:leveldb]
+    :leveldb => node[:leveldb],
     :mapred_system => node[:riak][:mapred_system]
   )
 end
