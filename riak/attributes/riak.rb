@@ -48,6 +48,13 @@ default[:innostore][:version] = "1.0.3"
 default[:innostore][:flush_method] = "O_DIRECT"
 
 default[:leveldb][:data_root] = "#{node[:riak][:data_dir]}/leveldb"
+default[:leveldb][:write_buffer_size] = 4194304
+default[:leveldb][:max_open_files] = 20
+default[:leveldb][:block_size] = 4096
+default[:leveldb][:block_restart_interval] = 16
+default[:leveldb][:cache_size] = 8388608
+default[:leveldb][:sync] = true
+default[:leveldb][:verify_checksums] = true
 
 default[:riak][:search][:data_root] = "#{node[:riak][:data_dir]}/merge_index"
 default[:riak][:search][:max_search_results] = 100000

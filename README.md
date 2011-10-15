@@ -73,6 +73,13 @@ considering Innostore, just use `"riak_kv_eleveldb_backend"`. Check the
 [attributes](https://github.com/mattmatt/scalarium-riak/blob/master/riak/attributes/riak.rb)
 file for all the available knobs and dials for the respective backends.
 
+Also make sure to check the wiki pages on the respective storage backends for
+information on operations and tuning:
+
+* [Bitcask](http://wiki.basho.com/Bitcask.html)
+* [LevelDB](http://wiki.basho.com/LevelDB.html)
+* [Innostore](http://wiki.basho.com/Innostore.html)
+
 How to get Support
 --------
 
