@@ -10,6 +10,13 @@ dpkg_package "riak" do
   source "/tmp/#{node[:riak][:package]}_#{node[:riak][:version]}-1_#{arch}.deb"
 end
 
+directory "#{node[:riak][:data_dir]}" do
+  action :create
+  recursive true
+  owner "riak"
+  group "riak"
+end
+
 directory "#{node[:riak][:data_dir]}/ring" do
   action :create
   recursive true
