@@ -14,7 +14,7 @@
 
               {ring_creation_size, <%= node[:riak][:ring_creation_size] %>},
               
-              {disable_http_nagle, <%= @disable_http_nagle %>}
+              {disable_http_nagle, <%= @disable_http_nagle %>},
               {platform_bin_dir, "/usr/sbin"},
               {platform_data_dir, "<%= @data_dir %>"},
               {platform_etc_dir, "/etc/riak"},
@@ -87,7 +87,7 @@
 
             %% riak_stat enables the use of the "riak-admin status" command to
             %% retrieve information the Riak node for performance and debugging needs
-            {riak_kv_stat, true}
+            {riak_kv_stat, true},
 
             %% http_url_encoding determines how Riak treats URL encoded
             %% buckets, keys, and links over the REST API. When set to 'on'
@@ -210,7 +210,7 @@
 
  %% SASL config
  {sasl, [
-         {sasl_error_logger, false},
+         {sasl_error_logger, false}
          ]}
 
 <% if node[:riak][:search_enabled] %>
