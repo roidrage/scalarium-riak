@@ -31,6 +31,13 @@ directory "#{node[:bitcask][:data_root]}" do
   group "riak"
 end
 
+directory "#{node[:leveldb][:data_root]}" do
+  action :create
+  recursive true
+  owner "riak"
+  group "riak"
+end
+
 if node[:riak][:search_enabled]
   directory "#{node[:riak][:data_dir]}/merge_index" do
     action :create
