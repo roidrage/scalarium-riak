@@ -139,7 +139,7 @@
               {buffer_pool_size, <%= @innostore[:buffer_pool_size] %>},
               {flush_method, "<%= @innostore[:flush_method] %>"}
              ]},
-<% elsif @storage_backend == "riak_kv_leveldb_backend" -%>
+<% elsif @storage_backend == "riak_kv_eleveldb_backend" -%>
  %% eLevelDB Config
  {eleveldb, [ 
              {data_root, "<%= @leveldb[:data_root] %>"} 
