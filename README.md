@@ -56,7 +56,7 @@ Storage Backends
 --------
 
 The cookbooks default to using [Bitcask](https://github.com/basho/bitcask), but include support for
-[Innostore](https://github.com/basho/innostore) as well.  To use the latter, specify a custom JSON for your cloud like
+[Innostore](https://github.com/basho/innostore) as well. To use the latter, specify a custom JSON for your cloud like
 so:
 
     {
@@ -67,6 +67,11 @@ so:
 
 This will make sure that Innostore is both installed and configured properly for use with Riak. See the attributes file
 for details on the available options.
+
+If you want to use LevelDB, which you should, especially when finding yourself
+considering Innostore, just use `"riak_kv_eleveldb_backend"`. Check the
+[attributes](https://github.com/mattmatt/scalarium-riak/blob/master/riak/attributes/riak.rb)
+file for all the available knobs and dials for the respective backends.
 
 How to get Support
 --------
