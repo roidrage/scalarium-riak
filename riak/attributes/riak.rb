@@ -1,5 +1,5 @@
 default[:volumes][:riak] = '/vol/riak'
-default[:riak][:version] = "1.0.0pre2"
+default[:riak][:version] = "1.0.0"
 default[:riak][:package] = "riak"
 default[:riak][:js_vm_count] = "8"
 default[:riak][:js_thread_stack] = "16"
