@@ -143,13 +143,13 @@
  %% eLevelDB Config
  {eleveldb, [ 
              {data_root, "<%= @leveldb[:data_root] %>"},
-             {write_buffer_size, <%= @leveldb[:write_buffer_size]},
-             {max_open_files, <%= @leveldb[:max_open_files]},
-             {block_size, <%= @leveldb[:block_size]},
-             {block_restart_interval, <%= @leveldb[:block_restart_interval]},
-             {cache_size, <%= @leveldb[:cache_size]},
-             {sync, <%= @leveldb[:sync]},
-             {verify_checksums, <%= @leveldb[:verify_checksums]}
+             {write_buffer_size, <%= @leveldb[:write_buffer_size] %>},
+             {max_open_files, <%= @leveldb[:max_open_files] %>},
+             {block_size, <%= @leveldb[:block_size] %>},
+             {block_restart_interval, <%= @leveldb[:block_restart_interval] %>},
+             {cache_size, <%= @leveldb[:cache_size] %>},
+             {sync, <%= @leveldb[:sync] %>},
+             {verify_checksums, <%= @leveldb[:verify_checksums] %>}
             ]}, 
 <% end %>
  %% Luwak Config
