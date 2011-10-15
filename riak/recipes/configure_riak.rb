@@ -47,6 +47,8 @@ template app_config do
     :erlang_paths => node[:riak][:erlang_paths],
     :vnode_mr_timeout => node[:riak][:vnode_mr_timeout],
     :innostore => node[:innostore],
-    :bitcask => node[:bitcask]
+    :bitcask => node[:bitcask],
+    :leveldb => node[:leveldb]
+    :mapred_system => node[:riak][:mapred_system]
   )
 end

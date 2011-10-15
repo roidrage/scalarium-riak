@@ -15,6 +15,12 @@
               {ring_creation_size, <%= node[:riak][:ring_creation_size] %>},
               
               {disable_http_nagle, <%= @disable_http_nagle %>}
+              {platform_bin_dir, "/usr/sbin"},
+              {platform_data_dir, "<%= @data_dir %>"},
+              {platform_etc_dir, "/etc/riak"},
+              {platform_lib_dir, "/usr/lib/riak"},
+              {platform_log_dir, "/var/log/riak"}
+
              ]},
 
  %% Riak KV config
@@ -40,8 +46,16 @@
             %% details.
             %{raw_name, "riak"},
 
+            {mapred_system, "<%= @mapred_system %>"},
+
             %% mapred_name is URL used to submit map/reduce requests to Riak.
             {mapred_name, "mapred"},
+<% if @mapred_system == "legacy" %>
+            {mapred_queue_dir, "/var/lib/riak/mr_queue" },
+            {map_cache_size, <%= @map_cache_size %>},
+            {mapper_batch_size, 5},
+<% end %>
+
 
             %% js_vm_count is the number of Javascript VMs to start per Riak
             %% node.  8 is a good default for smaller installations. A larger
@@ -66,7 +80,6 @@
             %% Javascript VMs.
             {js_source_dir, "<%= @js_source_dir %>"},
 
-            {map_cache_size, <%= @map_cache_size %>},
             %% vnode_mr_timeout controls how much time Riak will permit a map
             %% function to execute on a given vnode before trying another vnode.
             %% Value is in milliseconds and defaults to 1000ms if not set.
@@ -75,10 +88,34 @@
             %% riak_stat enables the use of the "riak-admin status" command to
             %% retrieve information the Riak node for performance and debugging needs
             {riak_kv_stat, true}
+
+            %% http_url_encoding determines how Riak treats URL encoded
+            %% buckets, keys, and links over the REST API. When set to 'on'
+            %% Riak always decodes encoded values sent as URLs and Headers.
+            %% Otherwise, Riak defaults to compatibility mode where links
+            %% are decoded, but buckets and keys are not. The compatibility
+            %% mode will be removed in a future release.
+            {http_url_encoding, on},
+
+            %% When using riak_kv_stat, use the legacy routines for tracking
+            {legacy_stats, true},
+
+            %% Switch to vnode-based vclocks rather than client ids.  This
+            %% significantly reduces the number of vclock entries.
+            %% Only set true if *all* nodes in the cluster are upgraded to 1.0
+            {vnode_vclocks, true},
+
+            %% This option enables compatability of bucket and key listing
+            %% with 0.14 and earlier versions. Once a rolling upgrade to
+            %% a version > 0.14 is completed for a cluster, this should be
+            %% set to false for improved performance for bucket and key
+            %% listing operations.
+            {legacy_keylisting, false}
+
            ]},
 
- %% Bitcask Config
 <% if @storage_backend == "riak_kv_bitcask_backend" -%>
+ %% Bitcask Config
  {bitcask, [
             {data_root, "<%= @data_root %>"},
             {max_file_size, <%= @max_file_size %>},
@@ -92,6 +129,7 @@
             {expiry_secs, <%= @expiry_secs %>}
            ]},
 <% elsif @storage_backend == "riak_kv_innostore_backend" -%>
+ %% Innostore Config
  {innostore, [
               {log_buffer_size, <%= @innostore[:log_buffer_size] %>},
               {log_files_in_group, <%= @innostore[:log_files_in_group] %>},
@@ -102,19 +140,77 @@
               {buffer_pool_size, <%= @innostore[:buffer_pool_size] %>},
               {flush_method, "<%= @innostore[:flush_method] %>"}
              ]},
+<% elsif @storage_backend == "riak_kv_leveldb_backend" -%>
+ %% eLevelDB Config
+ {eleveldb, [ 
+             {data_root, "<%= @leveldb[:data_root] %>"} 
+            ]}, 
 <% end %>
  %% Luwak Config
  {luwak, [
              {enabled, <%= @luwak %>}
          ]},
 
+ %% Lager Config
+ {lager, [
+            %% What handlers to install with what arguments
+            %% The defaults for the logfiles are to rotate the files when
+            %% they reach 10Mb or at midnight, whichever comes first, and keep
+            %% the last 5 rotations. See the lager README for a description of
+            %% the time rotation format:
+            %% https://github.com/basho/lager/blob/master/README.org
+            %%
+            %% If you wish to disable rotation, you can either set the size to 0
+            %% and the rotation time to "", or instead specify a 2-tuple that only
+            %% consists of {Logfile, Level}.
+            {handlers, [
+                {lager_console_backend, info},
+                {lager_file_backend, [
+                    {"/var/log/riak/error.log", error, 10485760, "$D0", 5},
+                    {"/var/log/riak/console.log", info, 10485760, "$D0", 5}
+                ]}
+            ]},
+
+            %% Whether to write a crash log, and where.
+            %% Commented/omitted/undefined means no crash logger.
+            {crash_log, "/var/log/riak/crash.log"},
+
+            %% Maximum size in bytes of events in the crash log - defaults to 65536
+            {crash_log_msg_size, 65536},
+
+            %% Maximum size of the crash log in bytes, before its rotated, set
+            %% to 0 to disable rotation - default is 0
+            {crash_log_size, 10485760},
+
+            %% What time to rotate the crash log - default is no time
+            %% rotation. See the lager README for a description of this format:
+            %% https://github.com/basho/lager/blob/master/README.org
+            {crash_log_date, "$D0"},
+
+            %% Number of rotated crash logs to keep, 0 means keep only the
+            %% current one - default is 0
+            {crash_log_count, 5},
+
+            %% Whether to redirect error_logger messages into lager - defaults to true
+            {error_logger_redirect, true}
+        ]},
+
+ %% riak_sysmon config
+ {riak_sysmon, [
+         %% To disable forwarding events of a particular type, use a
+         %% limit of 0.
+         {process_limit, 30},
+         {port_limit, 30},
+
+         %% Finding reasonable limits for a given workload is a matter
+         %% of experimentation.
+         {gc_ms_limit, 50},
+         {heap_word_limit, 10485760}
+        ]},
+
  %% SASL config
  {sasl, [
-         {sasl_error_logger, {file, "/var/log/<%= node[:riak][:package].gsub(/-/, "") %>/sasl-error.log"}},
-         {errlog_type, error},
-         {error_logger_mf_dir, "/var/log/<%= node[:riak][:package].gsub(/-/, "") %>/sasl"},      % Log directory
-         {error_logger_mf_maxbytes, 10485760},   % 10 MB max file size
-         {error_logger_mf_maxfiles, 5}           % 5 files max
+         {sasl_error_logger, false},
          ]}
 
 <% if node[:riak][:search_enabled] %>
@@ -133,6 +229,7 @@
          {backend_conn_count, 50}
         ]},
 
+ %% Solr Endpoint configuration
  {riak_solr, [
               {solr_name, "<%= node[:riak][:search][:solr_name] %>"},
               {default_schema, "<%= node[:riak][:search][:default_schema] %>"}

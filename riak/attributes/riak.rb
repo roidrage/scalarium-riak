@@ -1,6 +1,7 @@
 default[:volumes][:riak] = '/vol/riak'
 default[:riak][:version] = "1.0.0"
 default[:riak][:package] = "riak"
+default[:riak][:mapred_system] = "pipe"
 default[:riak][:js_vm_count] = "8"
 default[:riak][:js_thread_stack] = "16"
 default[:riak][:js_max_vm_mem] = "8"
@@ -45,6 +46,8 @@ default[:innostore][:log_group_home_dir] = "#{node[:riak][:data_dir]}/innodb"
 default[:innostore][:buffer_pool_size] = 2147483648
 default[:innostore][:version] = "1.0.2"
 default[:innostore][:flush_method] = "O_DIRECT"
+
+default[:leveldb][:data_root] = "#{node[:riak][:data_dir]}/leveldb"
 
 default[:riak][:search][:data_root] = "#{node[:riak][:data_dir]}/merge_index"
 default[:riak][:search][:max_search_results] = 100000
