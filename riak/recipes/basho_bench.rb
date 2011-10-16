@@ -4,6 +4,12 @@ execute "apt-add-repository 'deb http://ftp.heanet.ie/mirrors/cran.r-project.org
 
 execute "apt-get update"
 
-package "r-base"
+package "r-base" do
+  action :install
+  options "--force-yes"
+end
 
-package "r-base-dev"
+package "r-base-dev" do
+  action :install
+  options "--force-yes"
+end
